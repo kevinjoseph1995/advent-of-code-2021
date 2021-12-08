@@ -5,3 +5,5 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(advent_of_code1 1.cpp)
 add_executable(advent_of_code1_1 1_1.cpp)
+add_executable(advent_of_code2_1 2_1.cpp)
+add_executable(advent_of_code2_2 2_2.cpp)
