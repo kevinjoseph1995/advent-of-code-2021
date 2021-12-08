@@ -4,4 +4,4 @@ project(advent_of_code)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(advent_of_code1 1.cpp)
-add_executable(advent_of_code2 2.cpp)
+add_executable(advent_of_code1_1 1_1.cpp)
