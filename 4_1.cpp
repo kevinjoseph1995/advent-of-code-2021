@@ -42,6 +42,7 @@ int main(int argc, char **argv) {
     inline int &at(const int x, const int y) { return data_.at(y * 5 + x); }
     std::array<int, 5> row_count{5, 5, 5, 5, 5};
     std::array<int, 5> col_count{5, 5, 5, 5, 5};
+    int total_sum{};
 
   private:
     std::array<int, 5 * 5> data_;
@@ -66,6 +67,7 @@ int main(int argc, char **argv) {
         while (j < line.size()) {
           if (line[j] == ' ') {
             table_row[col_idx] = c;
+            current_table.total_sum += c;
             col_idx++;
             c = 0;
             while (line[j] == ' ' && j < line.size())
@@ -75,6 +77,7 @@ int main(int argc, char **argv) {
             j++;
           }
         }
+        current_table.total_sum += c;
         table_row[col_idx] = c;
       };
       insert_into_table_row(y, line);
@@ -92,6 +95,7 @@ int main(int argc, char **argv) {
             if (current_number == table.at(x, y)) {
               table.row_count[x] -= 1;
               table.col_count[y] -= 1;
+              table.total_sum -= current_number;
               table.at(x, y) = -1;
               if (table.row_count[x] == 0 || table.col_count[y] == 0) {
                 // Bingo
@@ -103,14 +107,8 @@ int main(int argc, char **argv) {
         return false;
       };
       if (bingo(input_number, table)) {
-        int sum = 0;
-        for (int y = 0; y < 5; y++) {
-          for (int x = 0; x < 5; x++) {
-            if (table.at(x, y) > 0)
-              sum += table.at(x, y);
-          }
-        }
-        printf("Winning number  is  %d\n", sum * input_number);
+
+        printf("Winning number  is  %d\n", table.total_sum * input_number);
         exit(0);
       }
     }
